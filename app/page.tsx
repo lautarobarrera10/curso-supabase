@@ -4,8 +4,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { getTimeAgo } from "./utils/time";
 import { posts as initialPosts, type Post } from "./mocks/posts";
-import { useEffect } from "react";
-import { supabase } from "./utils/client";
 
 function HeartIcon({ filled }: { filled: boolean }) {
   if (filled) {
@@ -98,18 +96,6 @@ function PostCard({ post, onLike, priority = false }: { post: Post; onLike: (id:
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>(initialPosts);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const { data, error } = await supabase.from('posts_new').select('*');
-      if (error) {
-        console.error('Error fetching posts:', error);
-      } else {
-        console.log(data);
-      }
-    };
-    fetchPosts();
-  }, []);
 
   const handleLike = (postId: number | string) => {
     setPosts((prevPosts) =>
