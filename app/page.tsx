@@ -38,7 +38,7 @@ function HeartIcon({ filled }: { filled: boolean }) {
   );
 }
 
-function PostCard({ post, onLike }: { post: Post; onLike: (id: number | string) => void }) {
+function PostCard({ post, onLike, priority = false }: { post: Post; onLike: (id: number | string) => void; priority?: boolean }) {
   return (
     <article className="bg-card-bg border border-border rounded-xl overflow-hidden shadow-sm">
       {/* Header con usuario y avatar */}
@@ -48,6 +48,7 @@ function PostCard({ post, onLike }: { post: Post; onLike: (id: number | string) 
             src={post.user.avatar}
             alt={post.user.username}
             fill
+            sizes="40px"
             className="object-cover"
           />
         </div>
@@ -63,6 +64,8 @@ function PostCard({ post, onLike }: { post: Post; onLike: (id: number | string) 
           src={post.image_url}
           alt={`Post de ${post.user.username}`}
           fill
+          sizes="(max-width: 576px) calc(100vw - 32px), 512px"
+          priority={priority}
           className="object-cover"
         />
       </div>
@@ -136,8 +139,8 @@ export default function Home() {
       {/* Feed de posts */}
       <main className="max-w-lg mx-auto px-4 py-6">
         <div className="flex flex-col gap-6">
-          {posts.map((post) => (
-            <PostCard key={post.id} post={post} onLike={handleLike} />
+          {posts.map((post, index) => (
+            <PostCard key={post.id} post={post} onLike={handleLike} priority={index === 0} />
           ))}
         </div>
       </main>

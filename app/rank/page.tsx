@@ -63,6 +63,7 @@ function Modal({
               src={post.user.avatar}
               alt={post.user.username}
               fill
+              sizes="40px"
               className="object-cover"
             />
           </div>
@@ -78,6 +79,7 @@ function Modal({
             src={post.image_url}
             alt={`Post de ${post.user.username}`}
             fill
+            sizes="(max-width: 576px) calc(100vw - 32px), 512px"
             className="object-cover"
           />
         </div>
@@ -127,6 +129,7 @@ export default function RankPage() {
                 src={post.image_url}
                 alt={`Post con ${post.likes} likes`}
                 fill
+                sizes="(max-width: 672px) 33vw, 216px"
                 className="object-cover transition-transform group-hover:scale-105"
               />
               {/* Overlay con likes al hover */}
